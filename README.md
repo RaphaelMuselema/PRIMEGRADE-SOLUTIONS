@@ -160,7 +160,7 @@
                     <option value="Research/Thesis Support">🎓 Research Proposal or Thesis</option>
                     <option value="CV/Resume Design">💼 Professional CV / Resume Design</option>
                     <option value="Homework Q&A (Chegg/Bartleby/CourseHero)">🔓 Homework Q&A (Chegg/Bartleby/CourseHero)</option>
-                </select>
+                    </select>
             </div>
 
             <div class="form-group">
