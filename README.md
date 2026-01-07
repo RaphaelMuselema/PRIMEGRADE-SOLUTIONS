@@ -138,6 +138,17 @@
         </div>
 
         <div class="card">
+            <h2>Trusted by Students</h2>
+            <div style="font-style: italic; color: #475569; font-size: 15px;">
+                <p>"Saved my semester! The circuit analysis breakdown was clear and helped me pass my exam."</p>
+                <p style="text-align: right; font-weight: bold; margin-top: -10px; font-style: normal;">— 4th Year Student, CBU</p>
+                <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 15px 0;">
+                <p>"Fastest CV service I've used. I got the internship interview at Mopani immediately."</p>
+                <p style="text-align: right; font-weight: bold; margin-top: -10px; font-style: normal;">— Engineering Graduate, UNZA</p>
+            </div>
+        </div>
+
+        <div class="card">
             <h2>Start Your Order</h2>
             <p style="text-align: center; color: #64748b; margin-bottom: 25px;">Select your service for an instant quote.</p>
 
@@ -148,8 +159,7 @@
                     <option value="Academic Assignment">📝 Academic Assignment (Essay/Report)</option>
                     <option value="Research/Thesis Support">🎓 Research Proposal or Thesis</option>
                     <option value="CV/Resume Design">💼 Professional CV / Resume Design</option>
-                    <option value="Chegg/Bartleby Unlock">🔓 Homework Q&A (Chegg/Bartleby)</option>
-                    <option value="AutoCAD Design">🏗️ AutoCAD Design & Drafting</option>
+                    <option value="Homework Q&A (Chegg/Bartleby/CourseHero)">🔓 Homework Q&A (Chegg/Bartleby/CourseHero)</option>
                 </select>
             </div>
 
