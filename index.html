@@ -14,7 +14,7 @@
         }
         body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background-color: var(--light); color: #333; line-height: 1.6; }
         
-        /* HEADER & HERO */
+        /* HEADER */
         .header { 
             background: linear-gradient(135deg, var(--primary), var(--secondary)); 
             color: white; 
@@ -23,29 +23,23 @@
             border-bottom: 4px solid var(--gold);
         }
         
-        /* LOGO STYLING */
-        .logo-container { margin-bottom: 10px; }
         .logo-img { 
-            width: 80px; 
-            height: 80px; 
+            width: 80px; height: 80px; 
             background-color: white; 
             border-radius: 50%; 
-            padding: 5px;
-            object-fit: contain;
-            border: 3px solid var(--gold);
+            padding: 5px; 
+            object-fit: contain; 
+            border: 3px solid var(--gold); 
+            margin-bottom: 10px;
         }
 
-        .brand { font-size: 28px; font-weight: 800; letter-spacing: 1px; margin: 10px 0 5px 0; }
+        .brand { font-size: 28px; font-weight: 800; letter-spacing: 1px; margin: 5px 0; }
         .tagline { color: var(--gold); font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* MAIN CONTAINER */
-        .container { 
-            max-width: 700px; 
-            margin: -30px auto 40px auto; 
-            padding: 20px; 
-        }
+        /* CONTAINER */
+        .container { max-width: 700px; margin: -30px auto 80px auto; padding: 20px; }
 
-        /* CARDS (Glass Effect) */
+        /* CARDS */
         .card {
             background: white;
             border-radius: 16px;
@@ -58,7 +52,6 @@
         h3 { color: var(--secondary); margin-bottom: 10px; font-size: 18px; }
 
         /* ABOUT SECTION */
-        .about-text { font-size: 16px; color: #475569; margin-bottom: 15px; }
         .founder-badge {
             background-color: #f8fafc;
             border-left: 4px solid var(--primary);
@@ -68,72 +61,46 @@
             font-style: italic;
         }
 
-        /* PAYMENT SECTION LOGOS */
-        .payment-logos {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
+        /* HOW IT WORKS STEPS */
+        .step-container { display: flex; justify-content: space-around; margin-top: 20px; flex-wrap: wrap; text-align: center; }
+        .step-box { flex: 1; min-width: 140px; margin: 10px; }
+        .step-num { font-size: 24px; width: 50px; height: 50px; line-height: 50px; border-radius: 50%; margin: 0 auto; font-weight: bold; }
+        
+        /* PAYMENT LOGOS */
+        .payment-section { margin-top: 20px; }
+        .payment-label { font-size: 14px; color: #64748b; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        .payment-row { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
+        
         .pay-icon {
-            height: 50px;
+            height: 45px;
             width: auto;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            padding: 5px;
+            background: white;
         }
-        .pay-icon:hover { transform: scale(1.05); }
 
-        /* FORM STYLING */
+        /* FORM */
         .form-group { margin-bottom: 20px; }
         label { display: block; font-weight: 700; margin-bottom: 8px; color: var(--secondary); }
-        select, input, textarea { 
-            width: 100%; 
-            padding: 14px; 
-            border: 2px solid #e2e8f0; 
-            border-radius: 10px; 
-            font-size: 16px; 
-            background: #f8fafc;
-            box-sizing: border-box;
-            transition: 0.3s;
-        }
-        select:focus, input:focus { 
-            border-color: var(--primary); 
-            background: white; 
-            outline: none; 
-        }
-
-        /* BUTTONS */
+        select, input { width: 100%; padding: 14px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 16px; background: #f8fafc; box-sizing: border-box; }
+        
+        /* WHATSAPP BUTTONS */
         .wa-btn {
             background: linear-gradient(to right, #16a34a, #22c55e);
-            color: white;
-            width: 100%;
-            padding: 18px;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(34, 197, 94, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            color: white; width: 100%; padding: 18px; border: none; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center;
         }
-        .wa-btn:active { transform: scale(0.98); }
-        .wa-icon { margin-right: 12px; font-size: 24px; }
+        .float-btn {
+            position: fixed; bottom: 20px; right: 20px; background-color: #25D366; color: white; border-radius: 50%; width: 60px; height: 60px; text-align: center; font-size: 30px; line-height: 60px; box-shadow: 2px 2px 10px rgba(0,0,0,0.3); z-index: 1000; text-decoration: none;
+        }
 
-        /* FOOTER */
         .footer { text-align: center; font-size: 13px; color: #94a3b8; padding-bottom: 30px; }
-
     </style>
 </head>
 <body>
 
     <div class="header">
-        <div class="logo-container">
-            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135810.png" alt="PrimeGrade Logo" class="logo-img">
-        </div>
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135810.png" alt="Logo" class="logo-img">
         <div class="brand">PRIMEGRADE SOLUTIONS</div>
         <div class="tagline">Excellence • Integrity • Precision</div>
     </div>
@@ -142,24 +109,40 @@
         
         <div class="card">
             <h2>About Us</h2>
-            <div class="about-text">
-                <p><strong>PrimeGrade Solutions</strong> is Zambia's leading academic consultancy, bridging the gap between complex engineering concepts and academic distinction. We prioritize understanding over rote learning.</p>
-                <p>From complex calculations to professional CV branding, our team ensures every project meets the highest standards of academic integrity.</p>
-            </div>
-            
+            <p style="color: #475569;"><strong>PrimeGrade Solutions</strong> is Zambia's leading academic consultancy. We bridge the gap between complex engineering concepts and academic distinction. We don't just provide answers; we provide understanding.</p>
             <div class="founder-badge">
-                <h3>👨‍💻 Meet the Co-Founder</h3>
-                <p>"As an Electromechanical Engineering specialist, I founded PrimeGrade to bring engineering precision to academic support. We don't just solve problems; we explain the 'Why' behind them."</p>
+                <p>"Founded by an Electromechanical Engineering specialist to bring precision and reliability to academic support."</p>
                 <p style="margin-top:10px; font-weight:bold;">— Raphael Muselema</p>
             </div>
         </div>
 
         <div class="card">
+            <h2>How It Works</h2>
+            <div class="step-container">
+                <div class="step-box">
+                    <div class="step-num" style="background: #e0f2fe; color: var(--primary);">1</div>
+                    <h4 style="margin: 10px 0;">Send Details</h4>
+                    <p style="font-size: 13px; color: #64748b;">Fill the form below or WhatsApp us.</p>
+                </div>
+                <div class="step-box">
+                    <div class="step-num" style="background: #fef3c7; color: #b45309;">2</div>
+                    <h4 style="margin: 10px 0;">Get Quote</h4>
+                    <p style="font-size: 13px; color: #64748b;">Receive a fixed price based on urgency.</p>
+                </div>
+                <div class="step-box">
+                    <div class="step-num" style="background: #dcfce7; color: #15803d;">3</div>
+                    <h4 style="margin: 10px 0;">Receive Work</h4>
+                    <p style="font-size: 13px; color: #64748b;">Get Distinction-grade solutions.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
             <h2>Start Your Order</h2>
-            <p style="text-align: center; color: #64748b; margin-bottom: 25px;">Select your service below for an instant WhatsApp quote.</p>
+            <p style="text-align: center; color: #64748b; margin-bottom: 25px;">Select your service for an instant quote.</p>
 
             <div class="form-group">
-                <label>What do you need?</label>
+                <label>Service Required</label>
                 <select id="service">
                     <option value="Engineering Calculation">⚙️ Engineering / Math Calculation</option>
                     <option value="Academic Assignment">📝 Academic Assignment (Essay/Report)</option>
@@ -185,45 +168,50 @@
             </div>
 
             <button class="wa-btn" onclick="sendToWhatsApp()">
-                <span class="wa-icon">➤</span> Send Inquiry via WhatsApp
+                <span style="margin-right:10px; font-size:20px;">➤</span> Send Inquiry via WhatsApp
             </button>
         </div>
 
         <div class="card" style="text-align: center;">
-            <h3>💳 Flexible Payment Options</h3>
-            <p style="font-size: 14px; color: #64748b;">We accept secure mobile money transactions.</p>
+            <h3>💳 Payment Options</h3>
             
-            <div class="payment-logos">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/New-mtn-logo.jpg" alt="MTN Money" class="pay-icon">
-                
-                <img src="https://seeklogo.com/images/A/airtel-logo-3C28D05E09-seeklogo.com.png" alt="Airtel Money" class="pay-icon">
-                
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/36/Zamtel_logo.svg/1200px-Zamtel_logo.svg.png" alt="Zamtel" class="pay-icon">
+            <div class="payment-section">
+                <div class="payment-label">🇿🇲 Local Clients (Zambia)</div>
+                <div class="payment-row">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/MTN_Logo.svg/200px-MTN_Logo.svg.png" alt="MTN Money" class="pay-icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Airtel_Logo.svg/200px-Airtel_Logo.svg.png" alt="Airtel Money" class="pay-icon">
+                    <div class="pay-icon" style="display:flex; align-items:center; justify-content:center; background:#009639; color:white; font-weight:bold; width:80px; font-size:12px;">ZAMTEL</div>
+                </div>
+            </div>
+
+            <div class="payment-section">
+                <div class="payment-label">🌍 International Clients</div>
+                <div class="payment-row">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="pay-icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/Payoneer_logo.svg" alt="Payoneer" class="pay-icon">
+                </div>
             </div>
         </div>
 
         <div class="footer">
             <p>© 2026 PrimeGrade Solutions. All Rights Reserved.</p>
-            <p>Kitwe, Zambia • 100% Confidential</p>
         </div>
 
     </div>
+
+    <a href="https://wa.me/260951036866" target="_blank" class="float-btn">💬</a>
 
     <script>
         function sendToWhatsApp() {
             var service = document.getElementById("service").value;
             var urgency = document.getElementById("urgency").value;
             var topic = document.getElementById("topic").value;
-            
-            // YOUR NUMBER
             var phone = "260951036866"; 
 
             var text = "*New Inquiry for PrimeGrade Solutions* %0a%0a";
             text += "📌 *Service:* " + service + "%0a";
             text += "⏰ *Urgency:* " + urgency + "%0a";
-            if(topic) {
-                text += "📚 *Topic:* " + topic + "%0a";
-            }
+            if(topic) { text += "📚 *Topic:* " + topic + "%0a"; }
             text += "%0a_Hello, I would like a quote for this work._";
 
             var url = "https://wa.me/" + phone + "?text=" + text;
