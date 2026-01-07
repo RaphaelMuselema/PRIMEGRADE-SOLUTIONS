@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primegrade Solutions | Academic & Career Excellence</title>
+    <style>
+        :root {
+            --primary: #0f172a; /* Navy Blue */
+            --accent: #22c55e;  /* WhatsApp Green */
+            --light: #f8fafc;
+            --gold: #fbbf24;
+        }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background-color: var(--light); color: #333; }
+        
+        /* Header */
+        .header { background: var(--primary); color: white; padding: 20px; text-align: center; }
+        .brand { font-size: 24px; font-weight: bold; letter-spacing: 1px; }
+        .tagline { color: var(--gold); font-size: 14px; margin-top: 5px; }
+
+        /* Hero Section */
+        .container { max-width: 600px; margin: 40px auto; padding: 20px; background: white; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        h2 { text-align: center; color: var(--primary); }
+        
+        /* Form Styling */
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: 600; margin-bottom: 8px; }
+        select, input { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 16px; box-sizing: border-box; }
+        select:focus { border-color: var(--primary); outline: none; }
+
+        /* Urgency Colors */
+        #urgency { font-weight: bold; }
+        
+        /* The WhatsApp Button */
+        .wa-btn {
+            background-color: var(--accent);
+            color: white;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+            text-decoration: none;
+        }
+        .wa-btn:hover { background-color: #16a34a; }
+        .wa-icon { margin-right: 10px; font-size: 22px; }
+
+        /* Trust Badges */
+        .trust { text-align: center; margin-top: 30px; font-size: 12px; color: #64748b; }
+        .trust span { margin: 0 5px; color: var(--primary); font-weight: bold; }
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="brand">PRIMEGRADE SOLUTIONS</div>
+        <div class="tagline">Excellence. Integrity. Precision.</div>
+    </div>
+
+    <div class="container">
+        <h2>Start Your Order</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 30px;">Select your service below to get an instant quote via WhatsApp.</p>
+
+        <div class="form-group">
+            <label>What do you need help with?</label>
+            <select id="service">
+                <option value="Academic Assignment">📝 Academic Assignment (Essay/Report)</option>
+                <option value="Research Proposal/Thesis">🎓 Research Proposal or Thesis</option>
+                <option value="CV or Resume Design">💼 CV / Resume Design</option>
+                <option value="Chegg/Bartleby Unlock">🔓 Chegg/Bartleby Question Unlock</option>
+                <option value="Engineering Calculation">⚙️ Engineering/Math Calculation</option>
+                <option value="Proofreading">👀 Proofreading & Editing</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>How urgent is this?</label>
+            <select id="urgency">
+                <option value="Standard (3-5 Days)">Standard (3-5 Days)</option>
+                <option value="Priority (24-48 Hours)">🔥 Priority (24-48 Hours)</option>
+                <option value="CRITICAL (ASAP - Today)">🚨 CRITICAL (ASAP - Today)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Any specific module or topic? (Optional)</label>
+            <input type="text" id="topic" placeholder="e.g. Thermodynamics, Marketing, etc.">
+        </div>
+
+        <button class="wa-btn" onclick="sendToWhatsApp()">
+            <span class="wa-icon">➤</span> Send Inquiry via WhatsApp
+        </button>
+
+        <div class="trust">
+            <p>100% Confidential • Verified Experts • Free Turnitin Report</p>
+        </div>
+    </div>
+
+    <script>
+        function sendToWhatsApp() {
+            // 1. Get Values from the Form
+            var service = document.getElementById("service").value;
+            var urgency = document.getElementById("urgency").value;
+            var topic = document.getElementById("topic").value;
+            
+            // 2. Your WhatsApp Number (Zambia)
+            var phone = "260970201887"; 
+
+            // 3. Construct the Message
+            var text = "*New Inquiry for PrimeGrade Solutions* %0a%0a";
+            text += "📌 *Service:* " + service + "%0a";
+            text += "⏰ *Urgency:* " + urgency + "%0a";
+            if(topic) {
+                text += "📚 *Topic:* " + topic + "%0a";
+            }
+            text += "%0a_Hello, I would like a quote for this work._";
+
+            // 4. Open WhatsApp
+            var url = "https://wa.me/" + phone + "?text=" + text;
+            window.open(url, '_blank');
+        }
+    </script>
+
+</body>
+</html>
