@@ -39,7 +39,7 @@
         select, input, textarea { width: 100%; padding: 15px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 16px; background: #f8fafc; box-sizing: border-box; font-family: inherit; }
         select:focus, input:focus, textarea:focus { border-color: var(--gold); background: white; outline: none; }
 
-        /* NEW LINK SAVER STYLES */
+        /* LINK SAVER SYSTEM */
         #platform-options { display: none; margin-top: 15px; padding: 20px; background: #f0f9ff; border-radius: 12px; border: 1px solid #bae6fd; }
         .link-adder-row { display: flex; gap: 10px; margin-bottom: 10px; }
         .link-adder-row select { width: 35%; } 
@@ -55,10 +55,7 @@
         .saved-item { 
             background: white; padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 13px; display: flex; justify-content: space-between; align-items: center;
         }
-        .saved-tag { padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 10px; color: white; margin-right: 8px; text-transform: uppercase; }
-        .tag-chegg { background: #e11d48; } /* Red */
-        .tag-bartleby { background: #ea580c; } /* Orange */
-        .tag-coursehero { background: #0284c7; } /* Blue */
+        .saved-number { font-weight: bold; color: var(--gold); margin-right: 5px; background: var(--primary); padding: 2px 6px; border-radius: 4px; font-size: 11px; }
         .delete-x { color: #94a3b8; font-weight: bold; cursor: pointer; padding: 0 5px; font-size: 16px; }
         .delete-x:hover { color: red; }
 
@@ -76,9 +73,13 @@
         @media (max-width: 600px) { .testimonial-grid { grid-template-columns: 1fr; } }
         .review-box { background: #f1f5f9; padding: 15px; border-radius: 12px; border-left: 4px solid var(--gold); font-size: 14px; }
         .stars { color: var(--gold); margin-bottom: 5px; font-size: 16px; }
+        
+        /* FAQ Styles */
         details { border-bottom: 1px solid #e2e8f0; padding: 15px 0; }
-        summary { font-weight: bold; color: var(--primary); cursor: pointer; display: flex; justify-content: space-between; }
-        .faq-answer { margin-top: 10px; font-size: 14px; color: #64748b; }
+        summary { font-weight: bold; color: var(--primary); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        summary::after { content: "+"; color: var(--gold); font-size: 20px; }
+        details[open] summary::after { content: "-"; }
+        .faq-answer { margin-top: 10px; font-size: 14px; color: #64748b; line-height: 1.5; }
 
         /* PAYMENT */
         .payment-row { display: flex; justify-content: center; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
@@ -138,7 +139,7 @@
 
                 <div id="platform-options">
                     <label style="color:#0f172a; margin-bottom:10px;">Link Manager:</label>
-                    <p style="font-size:12px; color:#64748b; margin-top:0;">Select platform, paste link, and click "Save Link".</p>
+                    <p style="font-size:12px; color:#64748b; margin-top:0;">1. Select Platform -> 2. Paste Link -> 3. Click Save</p>
                     
                     <div class="link-adder-row">
                         <select id="platform-select">
@@ -149,7 +150,7 @@
                         <input type="text" id="link-input-field" placeholder="Paste link here...">
                     </div>
                     
-                    <button class="add-link-btn" onclick="addLinkToList()">➕ Save Link to List</button>
+                    <button class="add-link-btn" onclick="addLinkToList()">➕ Save Link (Add Another)</button>
 
                     <div id="saved-links-list"></div>
                 </div>
@@ -179,8 +180,26 @@
 
         <div class="card">
             <h2>FAQ</h2>
-            <details><summary>Is my information confidential?</summary><div class="faq-answer">Yes, 100%. We never share client data.</div></details>
-            <details><summary>How do I make payment?</summary><div class="faq-answer">We accept Mobile Money and PayPal.</div></details>
+            <details>
+                <summary>Is my information confidential?</summary>
+                <div class="faq-answer">Yes, 100%. We value your privacy and never share client data with third parties.</div>
+            </details>
+            <details>
+                <summary>How do I make payment?</summary>
+                <div class="faq-answer">We accept Mobile Money (Airtel, MTN, Zamtel) and PayPal for international clients. Payment details are sent via WhatsApp.</div>
+            </details>
+            <details>
+                <summary>What if I am not satisfied?</summary>
+                <div class="faq-answer">We offer free revisions! If the work does not meet the agreed requirements, we will correct it immediately.</div>
+            </details>
+            <details>
+                <summary>How do I receive the finished work?</summary>
+                <div class="faq-answer">Completed files are sent directly to your WhatsApp or Email in PDF or Word format.</div>
+            </details>
+            <details>
+                <summary>Do you handle full semester courses?</summary>
+                <div class="faq-answer">Yes, we can manage quizzes, discussion posts, and weekly assignments for the entire semester.</div>
+            </details>
         </div>
 
         <div class="card">
@@ -211,7 +230,6 @@
     </div>
 
     <script>
-        // Store saved links here
         var savedLinks = [];
 
         function setTopic(name) { document.getElementById("topic").value = name; }
@@ -222,7 +240,7 @@
             platformDiv.style.display = service.includes("Homework Q&A") ? "block" : "none";
         }
 
-        // --- NEW: LINK SAVER LOGIC ---
+        // --- NEW: NUMBERED LINK SAVER ---
         function addLinkToList() {
             var platform = document.getElementById("platform-select").value;
             var url = document.getElementById("link-input-field").value;
@@ -232,14 +250,9 @@
                 return;
             }
 
-            // Save to memory
             var linkObj = { platform: platform, url: url };
             savedLinks.push(linkObj);
-
-            // Update Visual List
             renderLinks();
-
-            // Clear Input
             document.getElementById("link-input-field").value = "";
         }
 
@@ -250,17 +263,15 @@
 
         function renderLinks() {
             var container = document.getElementById("saved-links-list");
-            container.innerHTML = ""; // Clear current list
+            container.innerHTML = "";
 
             savedLinks.forEach(function(item, index) {
-                // Determine Tag Color
-                var tagClass = "tag-chegg";
-                if(item.platform === "Bartleby") tagClass = "tag-bartleby";
-                if(item.platform === "CourseHero") tagClass = "tag-coursehero";
-
+                var count = index + 1; // Numbering 1, 2, 3...
+                
                 var html = '<div class="saved-item">' +
-                           '<div><span class="saved-tag ' + tagClass + '">' + item.platform + '</span>' + 
-                           '<span style="color:#334155;">' + item.url.substring(0, 30) + '...</span></div>' +
+                           '<div><span class="saved-number">Link ' + count + '</span>' + 
+                           '<strong>[' + item.platform + ']</strong> ' +
+                           '<span style="color:#334155;">' + item.url.substring(0, 25) + '...</span></div>' +
                            '<span class="delete-x" onclick="removeLink(' + index + ')">×</span>' +
                            '</div>';
                 container.innerHTML += html;
@@ -279,11 +290,12 @@
             text += "⏰ *Urgency:* " + urgency + "\n";
             if(topic) { text += "📚 *Topic:* " + topic + "\n"; }
 
-            // LOOP THROUGH SAVED LINKS
+            // LOOP THROUGH SAVED LINKS WITH NUMBERS
             if (service.includes("Homework Q&A") && savedLinks.length > 0) {
                 text += "\n🔗 *Saved Links:* \n";
-                savedLinks.forEach(function(item) {
-                    text += "• " + item.platform + ": " + item.url + "\n";
+                savedLinks.forEach(function(item, index) {
+                    var count = index + 1;
+                    text += count + ". [" + item.platform + "] " + item.url + "\n";
                 });
             }
 
