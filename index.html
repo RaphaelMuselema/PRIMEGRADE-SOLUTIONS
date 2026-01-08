@@ -289,13 +289,4 @@
         function saveLinkItem() {
             var plat = document.getElementById("platform-select").value;
             var urlVal = document.getElementById("link-input-field").value;
-            if(urlVal === "") { showToast("⚠️ Paste a link first!"); return; }
-            var item = { p: plat, u: urlVal };
-            myLinks.push(item);
-            updateLinkDisplay();
-            document.getElementById("link-input-field").value = "";
-            showToast("🔗 Link Saved!");
-        }
-
-        function removeLinkItem(index) {
-     
+   
