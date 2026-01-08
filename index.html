@@ -39,22 +39,21 @@
         select, input, textarea { width: 100%; padding: 15px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 16px; background: #f8fafc; box-sizing: border-box; font-family: inherit; }
         select:focus, input:focus, textarea:focus { border-color: var(--gold); background: white; outline: none; }
 
-        /* LINK SAVER SYSTEM */
+        /* CHECKBOXES & LINK SAVER */
         #platform-options { display: none; margin-top: 15px; padding: 20px; background: #f0f9ff; border-radius: 12px; border: 1px solid #bae6fd; }
+        .checkbox-label { display: flex; align-items: center; font-weight: bold; color: var(--primary); cursor: pointer; margin-top: 10px; }
+        .checkbox-label input { width: 20px; height: 20px; margin-right: 10px; accent-color: var(--gold); }
+        
         .link-adder-row { display: flex; gap: 10px; margin-bottom: 10px; }
         .link-adder-row select { width: 35%; } 
         .link-adder-row input { width: 65%; }
         
-        .add-link-btn {
-            background: var(--primary); color: white; border: none; padding: 10px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px;
-        }
+        .add-link-btn { background: var(--primary); color: white; border: none; padding: 10px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px; }
         .add-link-btn:active { transform: scale(0.98); }
 
-        /* THE SAVED LIST */
+        /* SAVED LIST */
         #saved-links-list { margin-top: 15px; display: flex; flex-direction: column; gap: 8px; }
-        .saved-item { 
-            background: white; padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 13px; display: flex; justify-content: space-between; align-items: center;
-        }
+        .saved-item { background: white; padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 13px; display: flex; justify-content: space-between; align-items: center; }
         .delete-x { color: #94a3b8; font-weight: bold; cursor: pointer; padding: 0 5px; font-size: 16px; }
         .delete-x:hover { color: red; }
 
@@ -67,12 +66,7 @@
         .wa-btn { background: linear-gradient(to right, #16a34a, #22c55e); color: white; width: 100%; padding: 18px; border: none; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px -5px rgba(34, 197, 94, 0.4); animation: pulse 2s infinite; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
 
-        /* TESTIMONIALS & FAQ */
-        .testimonial-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        @media (max-width: 600px) { .testimonial-grid { grid-template-columns: 1fr; } }
-        .review-box { background: #f1f5f9; padding: 15px; border-radius: 12px; border-left: 4px solid var(--gold); font-size: 14px; }
-        .stars { color: var(--gold); margin-bottom: 5px; font-size: 16px; }
-        
+        /* FAQ */
         details { border-bottom: 1px solid #e2e8f0; padding: 15px 0; }
         summary { font-weight: bold; color: var(--primary); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         summary::after { content: "+"; color: var(--gold); font-size: 20px; }
@@ -84,6 +78,12 @@
         .pay-icon { height: 35px; width: auto; border-radius: 4px; border: 1px solid #e2e8f0; padding: 2px; background: white; }
         .zamtel-badge { height: 35px; padding: 0 10px; background: #009639; color: white; font-weight: bold; font-size: 11px; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
         
+        /* TESTIMONIALS */
+        .testimonial-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        @media (max-width: 600px) { .testimonial-grid { grid-template-columns: 1fr; } }
+        .review-box { background: #f1f5f9; padding: 15px; border-radius: 12px; border-left: 4px solid var(--gold); font-size: 14px; }
+        .stars { color: var(--gold); margin-bottom: 5px; font-size: 16px; }
+
         .footer { text-align: center; color: #64748b; padding-bottom: 30px; font-size: 13px; margin-top: 40px; }
         .footer-links { margin-bottom: 15px; font-weight: bold; color: var(--primary); }
     </style>
@@ -148,8 +148,7 @@
                         <input type="text" id="link-input-field" placeholder="Paste link here...">
                     </div>
                     
-                    <button class="add-link-btn" onclick="addLinkToList()">➕ Save Link (Add Another)</button>
-
+                    <button class="add-link-btn" onclick="addLinkToList()">➕ Save Link</button>
                     <div id="saved-links-list"></div>
                 </div>
             </div>
@@ -173,31 +172,22 @@
                 </div>
             </div>
 
+            <div class="form-group" style="background:#fef3c7; padding:10px; border-radius:8px; border:1px solid #fcd34d;">
+                <label class="checkbox-label" style="margin-top:0; color:#b45309;">
+                    <input type="checkbox" id="bulk-order"> 📌 I have multiple tasks/files (Bulk Order)
+                </label>
+            </div>
+
             <button class="wa-btn" onclick="sendToWhatsApp()">➤ Send Inquiry via WhatsApp</button>
         </div>
 
         <div class="card">
             <h2>FAQ</h2>
-            <details>
-                <summary>Is my information confidential?</summary>
-                <div class="faq-answer">Yes, 100%. We value your privacy and never share client data.</div>
-            </details>
-            <details>
-                <summary>How do I make payment?</summary>
-                <div class="faq-answer">We accept Mobile Money (Airtel, MTN, Zamtel) and PayPal.</div>
-            </details>
-            <details>
-                <summary>What if I am not satisfied?</summary>
-                <div class="faq-answer">We offer free revisions! If the work does not meet requirements, we correct it.</div>
-            </details>
-            <details>
-                <summary>How do I receive the work?</summary>
-                <div class="faq-answer">Completed files are sent directly to your WhatsApp or Email.</div>
-            </details>
-            <details>
-                <summary>Do you handle full semesters?</summary>
-                <div class="faq-answer">Yes, we can manage quizzes and assignments for the entire semester.</div>
-            </details>
+            <details><summary>Is my information confidential?</summary><div class="faq-answer">Yes, 100%. We never share client data.</div></details>
+            <details><summary>How do I make payment?</summary><div class="faq-answer">We accept Mobile Money (Airtel, MTN, Zamtel) and PayPal.</div></details>
+            <details><summary>What if I am not satisfied?</summary><div class="faq-answer">We offer free revisions! We correct it immediately.</div></details>
+            <details><summary>How do I receive the work?</summary><div class="faq-answer">Completed files are sent directly to your WhatsApp or Email.</div></details>
+            <details><summary>Do you handle full semesters?</summary><div class="faq-answer">Yes, we can manage quizzes and assignments for the entire semester.</div></details>
         </div>
 
         <div class="card">
@@ -221,7 +211,7 @@
         </div>
 
         <div class="footer">
-            <div class="footer-links"><a href="#">Home</a> | <a href="#service">Services</a> | <a href="https://wa.me/260951036866">Contact</a></div>
+            <div class="footer-links"><a href="#">Home</a> | <a href="#service">Services</a> | <a href="https://wa.me/260750621616">Contact</a></div>
             <div>© 2026 PrimeGrade Solutions. All Rights Reserved.</div>
             <div class="disclaimer">Disclaimer: Services are for research and reference only.</div>
         </div>
@@ -238,16 +228,10 @@
             platformDiv.style.display = service.includes("Homework Q&A") ? "block" : "none";
         }
 
-        // --- NEW: NUMBERED LINK SAVER ---
         function addLinkToList() {
             var platform = document.getElementById("platform-select").value;
             var url = document.getElementById("link-input-field").value;
-
-            if (url.trim() === "") {
-                alert("Please paste a link first!");
-                return;
-            }
-
+            if (url.trim() === "") { alert("Please paste a link first!"); return; }
             var linkObj = { platform: platform, url: url };
             savedLinks.push(linkObj);
             renderLinks();
@@ -262,11 +246,8 @@
         function renderLinks() {
             var container = document.getElementById("saved-links-list");
             container.innerHTML = "";
-
             savedLinks.forEach(function(item, index) {
                 var count = index + 1; 
-                
-                // EXACT FORMAT REQUESTED: #1 [Chegg] https://...
                 var html = '<div class="saved-item">' +
                            '<div><span style="font-weight:bold; color:#0f172a; margin-right:5px;">#' + count + '</span>' + 
                            '<span style="font-weight:bold; color:#000;">[' + item.platform + ']</span> ' +
@@ -276,20 +257,26 @@
                 container.innerHTML += html;
             });
         }
-        // -----------------------------
 
         function sendToWhatsApp() {
             var service = document.getElementById("service").value;
             var urgency = document.getElementById("urgency").value;
             var topic = document.getElementById("topic").value;
-            var phone = "260951036866"; 
+            var isBulk = document.getElementById("bulk-order").checked;
+            
+            // UPDATED PHONE NUMBER
+            var phone = "260750621616"; 
 
             var text = "*New Inquiry for PrimeGrade Solutions*\n\n";
+            
+            if (isBulk) {
+                text += "⚠️ *CLIENT MARKED AS BULK ORDER (Multiple Items)* ⚠️\n\n";
+            }
+            
             text += "📌 *Service:* " + service + "\n";
             text += "⏰ *Urgency:* " + urgency + "\n";
             if(topic) { text += "📚 *Topic:* " + topic + "\n"; }
 
-            // LOOP THROUGH SAVED LINKS WITH NUMBERS
             if (service.includes("Homework Q&A") && savedLinks.length > 0) {
                 text += "\n🔗 *Saved Links:* \n";
                 savedLinks.forEach(function(item, index) {
