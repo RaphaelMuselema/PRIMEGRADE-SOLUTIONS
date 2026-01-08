@@ -55,7 +55,6 @@
         .saved-item { 
             background: white; padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 13px; display: flex; justify-content: space-between; align-items: center;
         }
-        .saved-number { font-weight: bold; color: var(--gold); margin-right: 5px; background: var(--primary); padding: 2px 6px; border-radius: 4px; font-size: 11px; }
         .delete-x { color: #94a3b8; font-weight: bold; cursor: pointer; padding: 0 5px; font-size: 16px; }
         .delete-x:hover { color: red; }
 
@@ -74,7 +73,6 @@
         .review-box { background: #f1f5f9; padding: 15px; border-radius: 12px; border-left: 4px solid var(--gold); font-size: 14px; }
         .stars { color: var(--gold); margin-bottom: 5px; font-size: 16px; }
         
-        /* FAQ Styles */
         details { border-bottom: 1px solid #e2e8f0; padding: 15px 0; }
         summary { font-weight: bold; color: var(--primary); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         summary::after { content: "+"; color: var(--gold); font-size: 20px; }
@@ -182,23 +180,23 @@
             <h2>FAQ</h2>
             <details>
                 <summary>Is my information confidential?</summary>
-                <div class="faq-answer">Yes, 100%. We value your privacy and never share client data with third parties.</div>
+                <div class="faq-answer">Yes, 100%. We value your privacy and never share client data.</div>
             </details>
             <details>
                 <summary>How do I make payment?</summary>
-                <div class="faq-answer">We accept Mobile Money (Airtel, MTN, Zamtel) and PayPal for international clients. Payment details are sent via WhatsApp.</div>
+                <div class="faq-answer">We accept Mobile Money (Airtel, MTN, Zamtel) and PayPal.</div>
             </details>
             <details>
                 <summary>What if I am not satisfied?</summary>
-                <div class="faq-answer">We offer free revisions! If the work does not meet the agreed requirements, we will correct it immediately.</div>
+                <div class="faq-answer">We offer free revisions! If the work does not meet requirements, we correct it.</div>
             </details>
             <details>
-                <summary>How do I receive the finished work?</summary>
-                <div class="faq-answer">Completed files are sent directly to your WhatsApp or Email in PDF or Word format.</div>
+                <summary>How do I receive the work?</summary>
+                <div class="faq-answer">Completed files are sent directly to your WhatsApp or Email.</div>
             </details>
             <details>
-                <summary>Do you handle full semester courses?</summary>
-                <div class="faq-answer">Yes, we can manage quizzes, discussion posts, and weekly assignments for the entire semester.</div>
+                <summary>Do you handle full semesters?</summary>
+                <div class="faq-answer">Yes, we can manage quizzes and assignments for the entire semester.</div>
             </details>
         </div>
 
@@ -266,12 +264,13 @@
             container.innerHTML = "";
 
             savedLinks.forEach(function(item, index) {
-                var count = index + 1; // Numbering 1, 2, 3...
+                var count = index + 1; 
                 
+                // EXACT FORMAT REQUESTED: #1 [Chegg] https://...
                 var html = '<div class="saved-item">' +
-                           '<div><span class="saved-number">Link ' + count + '</span>' + 
-                           '<strong>[' + item.platform + ']</strong> ' +
-                           '<span style="color:#334155;">' + item.url.substring(0, 25) + '...</span></div>' +
+                           '<div><span style="font-weight:bold; color:#0f172a; margin-right:5px;">#' + count + '</span>' + 
+                           '<span style="font-weight:bold; color:#000;">[' + item.platform + ']</span> ' +
+                           '<span style="color:#64748b; font-size:12px;">' + item.url.substring(0, 30) + '...</span></div>' +
                            '<span class="delete-x" onclick="removeLink(' + index + ')">×</span>' +
                            '</div>';
                 container.innerHTML += html;
