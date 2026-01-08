@@ -5,102 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PrimeGrade Solutions | Excellence, Integrity, Precision</title>
     <style>
-        :root {
-            --primary: #0f172a; /* Corporate Navy */
-            --secondary: #334155; /* Slate Grey */
-            --gold: #fbbf24;    /* Bright Gold */
-            --light: #f8fafc;   /* Off-White */
-        }
+        :root { --primary: #0f172a; --secondary: #334155; --gold: #fbbf24; --light: #f8fafc; }
         body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background-color: var(--light); color: #333; line-height: 1.6; scroll-behavior: smooth; }
         a { text-decoration: none; color: inherit; }
         
         /* HEADER */
-        .header { 
-            background: linear-gradient(135deg, var(--primary), #1e293b); 
-            color: white; padding: 40px 20px 40px 20px; text-align: center; border-bottom: 5px solid var(--gold);
-        }
-        .logo-img { 
-            width: 90px; height: 90px; background-color: white; border-radius: 50%; padding: 5px; 
-            object-fit: contain; border: 3px solid var(--gold); margin-bottom: 10px;
-            box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
-        }
-        .brand { font-size: 30px; font-weight: 800; letter-spacing: 1px; margin: 5px 0; }
+        .header { background: linear-gradient(135deg, var(--primary), #1e293b); color: white; padding: 40px 20px; text-align: center; border-bottom: 5px solid var(--gold); }
+        .logo-img { width: 90px; height: 90px; background: white; border-radius: 50%; padding: 5px; object-fit: contain; border: 3px solid var(--gold); margin-bottom: 10px; box-shadow: 0 0 20px rgba(251, 191, 36, 0.5); }
+        .brand { font-size: 28px; font-weight: 800; letter-spacing: 1px; margin: 5px 0; }
         .sub-headline { color: #cbd5e1; font-size: 15px; margin-top: 5px; margin-bottom: 20px; }
-        
-        .header-btn {
-            background-color: var(--gold); color: var(--primary); padding: 12px 25px; border-radius: 30px;
-            font-weight: bold; font-size: 16px; display: inline-block;
-            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4); transition: transform 0.2s;
-        }
+        .header-btn { background-color: var(--gold); color: var(--primary); padding: 12px 25px; border-radius: 30px; font-weight: bold; font-size: 16px; display: inline-block; box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4); transition: transform 0.2s; }
         .header-btn:active { transform: scale(0.95); }
 
-        /* CONTAINER */
+        /* LAYOUT */
         .container { max-width: 800px; margin: -25px auto 40px auto; padding: 20px; }
-
-        /* CARDS */
         .card { background: white; border-radius: 16px; padding: 25px; box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1); margin-bottom: 25px; }
         h2 { color: var(--primary); border-left: 6px solid var(--gold); padding-left: 15px; margin-top: 0; }
         h3 { color: var(--secondary); margin-top: 0; font-size: 18px; }
 
-        /* TRUST BAR (New) */
+        /* TRUST BAR */
         .trust-bar { display: flex; justify-content: space-around; background: #e0f2fe; padding: 15px; border-radius: 12px; margin-bottom: 25px; font-size: 13px; font-weight: bold; color: var(--primary); text-align: center; border: 1px solid #bae6fd; }
         .trust-item span { display: block; font-size: 20px; margin-bottom: 5px; }
 
-        /* PORTFOLIO SCROLL */
+        /* PORTFOLIO */
         .portfolio-scroll { display: flex; overflow-x: auto; gap: 15px; padding-bottom: 10px; scrollbar-width: none; }
         .portfolio-item { min-width: 130px; background: #f1f5f9; border-radius: 12px; padding: 15px; text-align: center; border: 1px solid #e2e8f0; }
         .file-icon { font-size: 28px; margin-bottom: 5px; display: block; }
         .file-name { font-size: 12px; font-weight: bold; color: var(--secondary); }
 
-        /* HOW IT WORKS */
-        .step-container { display: flex; justify-content: space-around; margin-top: 20px; text-align: center; }
-        .step-box { flex: 1; margin: 5px; }
-        .step-num { width: 40px; height: 40px; line-height: 40px; border-radius: 50%; margin: 0 auto 10px auto; font-weight: bold; font-size: 18px; }
-        .step-title { font-weight: bold; font-size: 14px; margin-bottom: 5px; color: var(--primary); }
-        .step-desc { font-size: 12px; color: #64748b; }
-
-        /* FORM & INPUTS */
+        /* FORM */
         .form-group { margin-bottom: 20px; }
         label { display: block; font-weight: 700; margin-bottom: 8px; color: var(--secondary); }
-        select, input { width: 100%; padding: 15px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 16px; background: #f8fafc; box-sizing: border-box; transition: 0.3s; }
-        select:focus, input:focus { border-color: var(--gold); background: white; outline: none; }
+        select, input, textarea { width: 100%; padding: 15px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 16px; background: #f8fafc; box-sizing: border-box; font-family: inherit; }
+        select:focus, input:focus, textarea:focus { border-color: var(--gold); background: white; outline: none; }
 
-        /* INTERACTIVE PILLS */
+        /* CHECKBOX PLATFORMS */
+        #platform-options { display: none; margin-top: 15px; padding: 15px; background: #f0f9ff; border-radius: 10px; border: 1px solid #bae6fd; }
+        .checkbox-label { display: flex; align-items: center; font-weight: normal; margin-bottom: 10px; cursor: pointer; }
+        .checkbox-label input { width: 20px; height: 20px; margin-right: 10px; }
+        
+        /* DYNAMIC LINK BOXES */
+        .link-box { display: none; margin-top: 10px; }
+        .link-box textarea { height: 120px; border-color: #93c5fd; font-size: 14px; }
+        .link-label { font-size: 13px; color: #2563eb; font-weight: bold; margin-bottom: 5px; }
+
+        /* TAGS */
         .tags-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-        .tag { background: #e0f2fe; color: var(--primary); padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; border: 1px solid #bae6fd; cursor: pointer; transition: 0.2s; }
-        .tag:active { background: var(--gold); border-color: var(--gold); transform: scale(0.95); }
+        .tag { background: #e0f2fe; color: var(--primary); padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; border: 1px solid #bae6fd; cursor: pointer; }
+        .tag:active { background: var(--gold); transform: scale(0.95); }
 
-        /* WHATSAPP PULSE BUTTON */
-        .wa-btn {
-            background: linear-gradient(to right, #16a34a, #22c55e); color: white; width: 100%; padding: 18px; border: none; border-radius: 12px; 
-            font-size: 18px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 8px 20px -5px rgba(34, 197, 94, 0.4); animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
-        }
+        /* WHATSAPP BUTTON */
+        .wa-btn { background: linear-gradient(to right, #16a34a, #22c55e); color: white; width: 100%; padding: 18px; border: none; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px -5px rgba(34, 197, 94, 0.4); animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
 
-        /* LINK INPUT (Hidden by default) */
-        #link-group { display: none; margin-top: 15px; }
-        #link-input { border-color: #3b82f6; background: #eff6ff; }
-
-        /* PAYMENT ROW */
-        .payment-row { display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
-        .pay-icon { height: 35px; width: auto; border-radius: 4px; border: 1px solid #e2e8f0; padding: 2px; background: white; }
-        .zamtel-badge { height: 35px; padding: 0 10px; background: #009639; color: white; font-weight: bold; font-size: 11px; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
-
-        /* TESTIMONIALS */
+        /* TESTIMONIALS & FAQ */
         .testimonial-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         @media (max-width: 600px) { .testimonial-grid { grid-template-columns: 1fr; } }
         .review-box { background: #f1f5f9; padding: 15px; border-radius: 12px; border-left: 4px solid var(--gold); font-size: 14px; }
         .stars { color: var(--gold); margin-bottom: 5px; font-size: 16px; }
+        details { border-bottom: 1px solid #e2e8f0; padding: 15px 0; }
+        summary { font-weight: bold; color: var(--primary); cursor: pointer; display: flex; justify-content: space-between; }
+        .faq-answer { margin-top: 10px; font-size: 14px; color: #64748b; }
 
-        /* FOOTER */
+        /* PAYMENT */
+        .payment-row { display: flex; justify-content: center; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+        .pay-icon { height: 35px; width: auto; border-radius: 4px; border: 1px solid #e2e8f0; padding: 2px; background: white; }
+        .zamtel-badge { height: 35px; padding: 0 10px; background: #009639; color: white; font-weight: bold; font-size: 11px; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
+        
         .footer { text-align: center; color: #64748b; padding-bottom: 30px; font-size: 13px; margin-top: 40px; }
         .footer-links { margin-bottom: 15px; font-weight: bold; color: var(--primary); }
-        .disclaimer { font-size: 12px; color: #94a3b8; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -131,31 +104,53 @@
         </div>
 
         <div class="card">
-            <h2>How It Works</h2>
-            <div class="step-container">
-                <div class="step-box"><div class="step-num" style="background: #e0f2fe; color: var(--primary);">1</div><div class="step-title">Send Details</div><div class="step-desc">Fill form below</div></div>
-                <div class="step-box"><div class="step-num" style="background: #fef3c7; color: #b45309;">2</div><div class="step-title">Get Quote</div><div class="step-desc">Get fixed price</div></div>
-                <div class="step-box"><div class="step-num" style="background: #dcfce7; color: #15803d;">3</div><div class="step-title">Success</div><div class="step-desc">Receive work</div></div>
-            </div>
+            <h2>About Us</h2>
+            <p style="color: #475569;"><strong>PrimeGrade Solutions</strong> bridges the gap between complex engineering concepts and academic success. We don't just solve problems; we explain the 'Why' behind them.</p>
         </div>
 
         <div class="card" id="order-form">
             <h2>Start Your Order</h2>
-            <p style="text-align: center; color: #64748b; margin-bottom: 25px;">Select service for instant quote.</p>
-
+            
             <div class="form-group">
                 <label>Service Required</label>
-                <select id="service" onchange="toggleLinkBox()">
-                    <option value="Engineering Calculation">⚙️ Engineering / Math Calculation</option>
-                    <option value="Academic Assignment">📝 Academic Assignment (Essay/Report)</option>
-                    <option value="Research/Thesis Support">🎓 Research Proposal or Thesis</option>
-                    <option value="CV/Resume Design">💼 Professional CV / Resume Design</option>
-                    <option value="Homework Q&A">🔓 Homework Q&A (Chegg/CourseHero)</option>
+                <select id="service" onchange="togglePlatforms()">
+                    <option value="Assignments (All Courses)">📝 Assignments (All Courses)</option>
+                    <option value="Homework Q&A (Chegg/Bartleby/CourseHero)">🔓 Homework Q&A (Chegg/Bartleby/CourseHero)</option>
+                    <option value="Research Proposal / Synopsis">🎓 Research Proposal / Synopsis</option>
+                    <option value="Thesis & Dissertation Writing">📘 Thesis & Dissertation Writing</option>
+                    <option value="Final Year Project / Report">🏗️ Final Year Project / Report</option>
+                    <option value="Research Paper & Publishing">📄 Research Paper & Publishing</option>
+                    <option value="Data Analysis (SPSS/Excel)">📊 Data Analysis (SPSS/Excel)</option>
+                    <option value="Editing & Referencing (APA/Harvard)">✍️ Editing & Referencing (APA/Harvard)</option>
+                    <option value="Content Writing">💼 Content Writing</option>
                 </select>
-                
-                <div id="link-group">
-                    <label style="color:#2563eb;">Paste Question Link / URL:</label>
-                    <input type="text" id="link-input" placeholder="https://chegg.com/homework-help/...">
+
+                <div id="platform-options">
+                    <label style="color:#0f172a; margin-bottom:10px;">Select Platforms (Check all that apply):</label>
+                    
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="check-chegg" onchange="toggleLinkInput('chegg')"> Chegg
+                    </label>
+                    <div id="box-chegg" class="link-box">
+                        <div class="link-label">Paste Multiple Chegg Links (One per line):</div>
+                        <textarea id="links-chegg" placeholder="Link 1&#10;Link 2&#10;Link 3..."></textarea>
+                    </div>
+
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="check-bartleby" onchange="toggleLinkInput('bartleby')"> Bartleby
+                    </label>
+                    <div id="box-bartleby" class="link-box">
+                        <div class="link-label">Paste Multiple Bartleby Links:</div>
+                        <textarea id="links-bartleby" placeholder="Link 1&#10;Link 2..."></textarea>
+                    </div>
+
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="check-coursehero" onchange="toggleLinkInput('coursehero')"> CourseHero
+                    </label>
+                    <div id="box-coursehero" class="link-box">
+                        <div class="link-label">Paste Multiple CourseHero Links:</div>
+                        <textarea id="links-coursehero" placeholder="Link 1&#10;Link 2..."></textarea>
+                    </div>
                 </div>
             </div>
 
@@ -171,17 +166,28 @@
             <div class="form-group">
                 <label>Topic / Module</label>
                 <input type="text" id="topic" placeholder="e.g. Power Systems...">
-                
                 <div class="tags-container">
                     <div class="tag" onclick="setTopic('Calculus')">Calculus</div>
                     <div class="tag" onclick="setTopic('Fluids')">Fluids</div>
-                    <div class="tag" onclick="setTopic('Structures')">Structures</div>
                     <div class="tag" onclick="setTopic('Thermodynamics')">Thermodynamics</div>
-                    <div class="tag" onclick="setTopic('Marketing')">Marketing</div>
                 </div>
             </div>
 
             <button class="wa-btn" onclick="sendToWhatsApp()">➤ Send Inquiry via WhatsApp</button>
+        </div>
+
+        <div class="card">
+            <h2>FAQ</h2>
+            <details><summary>Is my information confidential?</summary><div class="faq-answer">Yes, 100%. We never share client data.</div></details>
+            <details><summary>How do I make payment?</summary><div class="faq-answer">We accept Mobile Money and PayPal.</div></details>
+        </div>
+
+        <div class="card">
+            <h2>Trusted by Students</h2>
+            <div class="testimonial-grid">
+                <div class="review-box"><div class="stars">★★★★★</div><p>"The circuit analysis breakdown was clear."</p><div style="font-weight:bold; font-size:12px;">— CBU Student</div></div>
+                <div class="review-box"><div class="stars">★★★★★</div><p>"Fastest CV service I've used."</p><div style="font-weight:bold; font-size:12px;">— UNZA Graduate</div></div>
+            </div>
         </div>
 
         <div class="card" style="text-align: center;">
@@ -197,53 +203,59 @@
         </div>
 
         <div class="footer">
-            <div class="footer-links">
-                <a href="#">Home</a> | <a href="#service">Services</a> | <a href="https://wa.me/260951036866">Contact</a> | <a href="#">Terms</a>
-            </div>
+            <div class="footer-links"><a href="#">Home</a> | <a href="#service">Services</a> | <a href="https://wa.me/260951036866">Contact</a></div>
             <div>© 2026 PrimeGrade Solutions. All Rights Reserved.</div>
-            <div class="disclaimer">Disclaimer: All services are provided for research, reference, and academic assistance purposes only.</div>
+            <div class="disclaimer">Disclaimer: Services are for research and reference only.</div>
         </div>
-
     </div>
 
     <script>
-        // 1. Interactive Tags Logic
-        function setTopic(name) {
-            document.getElementById("topic").value = name;
-        }
+        function setTopic(name) { document.getElementById("topic").value = name; }
 
-        // 2. Conditional Link Box Logic
-        function toggleLinkBox() {
+        function togglePlatforms() {
             var service = document.getElementById("service").value;
-            var linkGroup = document.getElementById("link-group");
-            if (service === "Homework Q&A") {
-                linkGroup.style.display = "block";
+            var platformDiv = document.getElementById("platform-options");
+            // Check if user selected Homework Q&A
+            if (service.includes("Homework Q&A")) {
+                platformDiv.style.display = "block";
             } else {
-                linkGroup.style.display = "none";
+                platformDiv.style.display = "none";
             }
         }
 
-        // 3. WhatsApp Logic (Updated)
+        function toggleLinkInput(platform) {
+            var isChecked = document.getElementById("check-" + platform).checked;
+            document.getElementById("box-" + platform).style.display = isChecked ? "block" : "none";
+        }
+
         function sendToWhatsApp() {
             var service = document.getElementById("service").value;
             var urgency = document.getElementById("urgency").value;
             var topic = document.getElementById("topic").value;
-            var link = document.getElementById("link-input").value;
             var phone = "260951036866"; 
 
-            var text = "*New Inquiry for PrimeGrade Solutions* %0a%0a";
-            text += "📌 *Service:* " + service + "%0a";
-            text += "⏰ *Urgency:* " + urgency + "%0a";
-            
-            if(topic) { text += "📚 *Topic:* " + topic + "%0a"; }
-            
-            // Add Link if provided
-            if (service === "Homework Q&A" && link) {
-                text += "🔗 *Link:* " + link + "%0a";
+            // 1. Build the Message String
+            var text = "*New Inquiry for PrimeGrade Solutions*\n\n";
+            text += "📌 *Service:* " + service + "\n";
+            text += "⏰ *Urgency:* " + urgency + "\n";
+            if(topic) { text += "📚 *Topic:* " + topic + "\n"; }
+
+            // 2. Add Links if Homework Q&A is selected
+            if (service.includes("Homework Q&A")) {
+                var cLinks = document.getElementById("links-chegg").value;
+                var bLinks = document.getElementById("links-bartleby").value;
+                var hLinks = document.getElementById("links-coursehero").value;
+
+                if(cLinks) { text += "\n🔵 *Chegg Links:*\n" + cLinks + "\n"; }
+                if(bLinks) { text += "\n🔴 *Bartleby Links:*\n" + bLinks + "\n"; }
+                if(hLinks) { text += "\n🟠 *CourseHero Links:*\n" + hLinks + "\n"; }
             }
 
-            text += "%0a_Hello, I would like a quote for this work._";
-            window.open("https://wa.me/" + phone + "?text=" + text, '_blank');
+            text += "\n_Hello, I would like a quote for this work._";
+            
+            // 3. Encode the WHOLE message safely for WhatsApp
+            var encodedText = encodeURIComponent(text);
+            window.open("https://wa.me/" + phone + "?text=" + encodedText, '_blank');
         }
     </script>
 </body>
