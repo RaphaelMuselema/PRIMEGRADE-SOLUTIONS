@@ -33,7 +33,7 @@
         .file-icon { font-size: 28px; margin-bottom: 5px; display: block; }
         .file-name { font-size: 12px; font-weight: bold; color: var(--secondary); }
 
-        /* FORM STYLES */
+        /* FORM */
         .form-group { margin-bottom: 20px; }
         label { display: block; font-weight: 700; margin-bottom: 8px; color: var(--secondary); }
         select, input, textarea { width: 100%; padding: 15px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 16px; background: #f8fafc; box-sizing: border-box; font-family: inherit; }
@@ -44,9 +44,9 @@
         .service-adder-row select { width: 75%; }
         .add-svc-btn { 
             width: 25%; background: var(--primary); color: white; border: none; border-radius: 12px; 
-            font-weight: bold; cursor: pointer; 
+            font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center;
         }
-        .add-svc-btn:active { transform: scale(0.95); }
+        .add-svc-btn:active { transform: scale(0.95); background: var(--gold); }
 
         /* SELECTED SERVICE LIST */
         #selected-services-display { margin-top: 10px; display: flex; flex-direction: column; gap: 5px; }
@@ -68,7 +68,7 @@
         /* SAVED LINKS LIST */
         #saved-links-list { margin-top: 15px; display: flex; flex-direction: column; gap: 8px; }
         .saved-item { background: white; padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 13px; display: flex; justify-content: space-between; align-items: center; }
-        .delete-x { color: #94a3b8; font-weight: bold; cursor: pointer; padding: 0 5px; font-size: 16px; }
+        .delete-x { color: #94a3b8; font-weight: bold; cursor: pointer; padding: 0 10px; font-size: 18px; }
         .delete-x:hover { color: red; }
 
         /* TAGS */
@@ -131,7 +131,7 @@
 
         <div class="card">
             <h2>About Us</h2>
-            <p style="color: #475569;"><strong>PrimeGrade Solutions</strong> is your premier academic consultancy. While we specialize in <strong>Engineering & Calculations</strong>, we provide excellence across all fields—from <strong>General Assignments</strong> to <strong>Professional CVs</strong>. We deliver precision, integrity, and results.</p>
+            <p style="color: #475569;"><strong>PrimeGrade Solutions</strong> is your premier academic consultancy. We deliver precision, integrity, and results across all fields.</p>
         </div>
 
         <div class="card" id="order-form">
@@ -150,7 +150,7 @@
                         <option value="Thesis & Dissertation Writing">📘 Thesis & Dissertation Writing</option>
                         <option value="Data Analysis (SPSS/Excel)">📊 Data Analysis (SPSS/Excel)</option>
                     </select>
-                    <button class="add-svc-btn" type="button" onclick="addService()">➕ Add</button>
+                    <button class="add-svc-btn" type="button" onclick="addNewServiceItem()">➕ Add</button>
                 </div>
 
                 <div id="selected-services-display"></div>
@@ -168,7 +168,7 @@
                         <input type="text" id="link-input-field" placeholder="Paste link here...">
                     </div>
                     
-                    <button class="add-link-btn" type="button" onclick="addLinkToList()">➕ Save Link</button>
+                    <button class="add-link-btn" type="button" onclick="saveLinkItem()">➕ Save Link</button>
                     <div id="saved-links-list"></div>
                 </div>
             </div>
@@ -192,24 +192,13 @@
                 </div>
             </div>
 
-            <button class="wa-btn" type="button" onclick="sendToWhatsApp()">➤ Send Inquiry via WhatsApp</button>
+            <button class="wa-btn" type="button" onclick="finalizeInquiry()">➤ Send Inquiry via WhatsApp</button>
         </div>
 
         <div class="card">
             <h2>FAQ</h2>
             <details><summary>Is my information confidential?</summary><div class="faq-answer">Yes, 100%. We never share client data.</div></details>
             <details><summary>How do I make payment?</summary><div class="faq-answer">We accept Mobile Money (Airtel, MTN, Zamtel) and PayPal.</div></details>
-            <details><summary>What if I am not satisfied?</summary><div class="faq-answer">We offer free revisions! We correct it immediately.</div></details>
-            <details><summary>How do I receive the work?</summary><div class="faq-answer">Completed files are sent directly to your WhatsApp or Email.</div></details>
-            <details><summary>Do you handle full semesters?</summary><div class="faq-answer">Yes, we can manage quizzes and assignments for the entire semester.</div></details>
-        </div>
-
-        <div class="card">
-            <h2>Trusted by Students</h2>
-            <div class="testimonial-grid">
-                <div class="review-box"><div class="stars">★★★★★</div><p>"The circuit analysis breakdown was clear."</p><div style="font-weight:bold; font-size:12px;">— CBU Student</div></div>
-                <div class="review-box"><div class="stars">★★★★★</div><p>"Fastest CV service I've used."</p><div style="font-weight:bold; font-size:12px;">— UNZA Graduate</div></div>
-            </div>
         </div>
 
         <div class="card" style="text-align: center;">
@@ -227,109 +216,119 @@
         <div class="footer">
             <div class="footer-links"><a href="#">Home</a> | <a href="#service">Services</a> | <a href="https://wa.me/260750621616">Contact</a></div>
             <div>© 2026 PrimeGrade Solutions. All Rights Reserved.</div>
-            <div class="disclaimer">Disclaimer: Services are for research and reference only.</div>
         </div>
     </div>
 
     <script>
-        // GLOBAL VARIABLES
-        var selectedServices = [];
-        var savedLinks = [];
+        // GLOBAL LISTS
+        var myServices = [];
+        var myLinks = [];
 
         function setTopic(name) { 
             document.getElementById("topic").value = name; 
         }
 
-        // --- SERVICE MANAGER ---
-        function addService() {
+        // --- SERVICE FUNCTIONS ---
+        function addNewServiceItem() {
             var dropdown = document.getElementById("service-dropdown");
             var svcName = dropdown.value;
 
-            // Check duplicate using classic loop for safety
-            var exists = false;
-            for(var i=0; i < selectedServices.length; i++) {
-                if(selectedServices[i] === svcName) exists = true;
+            // Check duplicate
+            var isDuplicate = false;
+            for(var i=0; i < myServices.length; i++) {
+                if(myServices[i] === svcName) {
+                    isDuplicate = true;
+                }
             }
 
-            if(exists) {
+            if(isDuplicate) {
                 alert("You already added this service.");
                 return;
             }
 
-            selectedServices.push(svcName);
-            renderServices();
-            checkHomeworkVisibility();
+            myServices.push(svcName);
+            updateServiceDisplay();
+            checkHwVisibility();
         }
 
-        function removeService(index) {
-            selectedServices.splice(index, 1);
-            renderServices();
-            checkHomeworkVisibility();
+        function removeServiceItem(index) {
+            myServices.splice(index, 1);
+            updateServiceDisplay();
+            checkHwVisibility();
         }
 
-        function renderServices() {
+        function updateServiceDisplay() {
             var container = document.getElementById("selected-services-display");
-            container.innerHTML = "";
+            var htmlBuilder = "";
             
-            for(var i=0; i < selectedServices.length; i++) {
-                var count = i + 1;
-                var html = '<div class="selected-svc-item">' +
-                           '<div><span class="svc-number">' + count + '</span>' + selectedServices[i] + '</div>' +
-                           '<span class="delete-x" onclick="removeService(' + i + ')">×</span>' +
-                           '</div>';
-                container.innerHTML += html;
+            for(var i=0; i < myServices.length; i++) {
+                var num = i + 1;
+                htmlBuilder += '<div class="selected-svc-item">' +
+                               '<div><span class="svc-number">' + num + '</span>' + myServices[i] + '</div>' +
+                               '<span class="delete-x" onclick="removeServiceItem(' + i + ')">×</span>' +
+                               '</div>';
             }
+            container.innerHTML = htmlBuilder;
         }
 
-        function checkHomeworkVisibility() {
-            var platformDiv = document.getElementById("platform-options");
-            var hasHomework = false;
-            for(var i=0; i < selectedServices.length; i++) {
-                if(selectedServices[i].indexOf("Homework Q&A") > -1) {
-                    hasHomework = true;
+        function checkHwVisibility() {
+            var box = document.getElementById("platform-options");
+            var found = false;
+            for(var i=0; i < myServices.length; i++) {
+                // Check if string contains Homework Q&A
+                if(myServices[i].indexOf("Homework Q&A") !== -1) {
+                    found = true;
                 }
             }
-            platformDiv.style.display = hasHomework ? "block" : "none";
+            if(found) {
+                box.style.display = "block";
+            } else {
+                box.style.display = "none";
+            }
         }
-        // -----------------------
 
-        // --- LINK MANAGER ---
-        function addLinkToList() {
-            var platform = document.getElementById("platform-select").value;
-            var url = document.getElementById("link-input-field").value;
-            if (url.trim() === "") { alert("Please paste a link first!"); return; }
+        // --- LINK FUNCTIONS ---
+        function saveLinkItem() {
+            var plat = document.getElementById("platform-select").value;
+            var urlVal = document.getElementById("link-input-field").value;
+
+            if(urlVal === "") {
+                alert("Please paste a link first!");
+                return;
+            }
+
+            var item = { p: plat, u: urlVal };
+            myLinks.push(item);
+            updateLinkDisplay();
             
-            var linkObj = { platform: platform, url: url };
-            savedLinks.push(linkObj);
-            renderLinks();
+            // Clear input
             document.getElementById("link-input-field").value = "";
         }
 
-        function removeLink(index) {
-            savedLinks.splice(index, 1);
-            renderLinks();
+        function removeLinkItem(index) {
+            myLinks.splice(index, 1);
+            updateLinkDisplay();
         }
 
-        function renderLinks() {
+        function updateLinkDisplay() {
             var container = document.getElementById("saved-links-list");
-            container.innerHTML = "";
-            
-            for(var i=0; i < savedLinks.length; i++) {
-                var count = i + 1; 
-                var item = savedLinks[i];
-                var html = '<div class="saved-item">' +
-                           '<div><span style="font-weight:bold; color:#0f172a; margin-right:5px;">#' + count + '</span>' + 
-                           '<span style="font-weight:bold; color:#000;">[' + item.platform + ']</span> ' +
-                           '<span style="color:#64748b; font-size:12px;">' + item.url.substring(0, 30) + '...</span></div>' +
-                           '<span class="delete-x" onclick="removeLink(' + i + ')">×</span>' +
-                           '</div>';
-                container.innerHTML += html;
-            }
-        }
-        // -----------------------
+            var htmlBuilder = "";
 
-        function sendToWhatsApp() {
-            if (selectedServices.length === 0) {
+            for(var i=0; i < myLinks.length; i++) {
+                var num = i + 1;
+                htmlBuilder += '<div class="saved-item">' +
+                               '<div><span style="font-weight:bold; color:#0f172a; margin-right:5px;">#' + num + '</span>' + 
+                               '<span style="font-weight:bold;">[' + myLinks[i].p + ']</span> ' +
+                               '<span style="color:#64748b; font-size:12px;">' + myLinks[i].u.substring(0, 25) + '...</span></div>' +
+                               '<span class="delete-x" onclick="removeLinkItem(' + i + ')">×</span>' +
+                               '</div>';
+            }
+            container.innerHTML = htmlBuilder;
+        }
+
+        // --- SEND TO WHATSAPP ---
+        function finalizeInquiry() {
+            if(myServices.length === 0) {
                 alert("Please add at least one service.");
                 return;
             }
@@ -338,13 +337,34 @@
             var topic = document.getElementById("topic").value;
             var phone = "260750621616"; 
 
-            var text = "*New Inquiry for PrimeGrade Solutions*\n\n";
+            var msg = "*New Inquiry for PrimeGrade Solutions*\n\n";
             
-            // 1. LIST SERVICES NUMERICALLY
-            text += "📌 *Services Required:* \n";
-            for(var i=0; i < selectedServices.length; i++) {
-                text += (i + 1) + ". " + selectedServices[i] + "\n";
+            // 1. Services
+            msg += "📌 *Services Required:* \n";
+            for(var i=0; i < myServices.length; i++) {
+                var n = i + 1;
+                msg += n + ". " + myServices[i] + "\n";
             }
 
-            text += "\n⏰ *Urgency:* " + urgency + "\n";
-         
+            msg += "\n⏰ *Urgency:* " + urgency + "\n";
+            if(topic !== "") { 
+                msg += "📚 *Topic:* " + topic + "\n"; 
+            }
+
+            // 2. Links
+            if(myLinks.length > 0) {
+                msg += "\n🔗 *Saved Links:* \n";
+                for(var j=0; j < myLinks.length; j++) {
+                    var m = j + 1;
+                    msg += m + ". [" + myLinks[j].p + "] " + myLinks[j].u + "\n";
+                }
+            }
+
+            msg += "\n_Hello, I would like a quote for this work._";
+            
+            var encoded = encodeURIComponent(msg);
+            window.open("https://wa.me/" + phone + "?text=" + encoded, '_blank');
+        }
+    </script>
+</body>
+</html>
