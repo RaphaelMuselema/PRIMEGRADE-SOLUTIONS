@@ -33,17 +33,24 @@
         .file-icon { font-size: 28px; margin-bottom: 5px; display: block; }
         .file-name { font-size: 12px; font-weight: bold; color: var(--secondary); }
 
-        /* FORM */
+        /* FORM STYLES */
         .form-group { margin-bottom: 20px; }
         label { display: block; font-weight: 700; margin-bottom: 8px; color: var(--secondary); }
         select, input, textarea { width: 100%; padding: 15px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 16px; background: #f8fafc; box-sizing: border-box; font-family: inherit; }
         select:focus, input:focus, textarea:focus { border-color: var(--gold); background: white; outline: none; }
 
-        /* CHECKBOXES & LINK SAVER */
-        #platform-options { display: none; margin-top: 15px; padding: 20px; background: #f0f9ff; border-radius: 12px; border: 1px solid #bae6fd; }
-        .checkbox-label { display: flex; align-items: center; font-weight: bold; color: var(--primary); cursor: pointer; margin-top: 10px; }
-        .checkbox-label input { width: 20px; height: 20px; margin-right: 10px; accent-color: var(--gold); }
+        /* NEW: MULTI-SELECT CHECKBOX LIST */
+        .service-list { display: flex; flex-direction: column; gap: 8px; }
+        .service-option { 
+            display: flex; align-items: center; 
+            background: #f1f5f9; padding: 12px; border-radius: 8px; 
+            cursor: pointer; border: 1px solid #e2e8f0; transition: 0.2s;
+        }
+        .service-option:hover { background: #e2e8f0; }
+        .service-option input { width: 20px; height: 20px; margin-right: 12px; accent-color: var(--gold); }
         
+        /* LINK SAVER SYSTEM */
+        #platform-options { display: none; margin-top: 15px; padding: 20px; background: #f0f9ff; border-radius: 12px; border: 1px solid #bae6fd; }
         .link-adder-row { display: flex; gap: 10px; margin-bottom: 10px; }
         .link-adder-row select { width: 35%; } 
         .link-adder-row input { width: 65%; }
@@ -124,16 +131,38 @@
             <h2>Start Your Order</h2>
             
             <div class="form-group">
-                <label>Service Required</label>
-                <select id="service" onchange="togglePlatforms()">
-                    <option value="Homework Q&A (Chegg/Bartleby/CourseHero)">🔓 Homework Q&A (Chegg/Bartleby/CourseHero)</option>
-                    <option value="Professional CV / Resume Design">💼 Professional CV / Resume Design</option>
-                    <option value="Assignments (All Courses)">📝 Assignments (All Courses)</option>
-                    <option value="Final Year Project / Report">🏗️ Final Year Project / Report</option>
-                    <option value="Research Proposal">🎓 Research Proposal / Synopsis</option>
-                    <option value="Thesis & Dissertation Writing">📘 Thesis & Dissertation Writing</option>
-                    <option value="Data Analysis (SPSS/Excel)">📊 Data Analysis (SPSS/Excel)</option>
-                </select>
+                <label>Select Service(s) Required (You can choose multiple):</label>
+                
+                <div class="service-list">
+                    <label class="service-option">
+                        <input type="checkbox" class="svc-chk" value="Homework Q&A" id="chk-homework" onchange="togglePlatforms()"> 
+                        Homework Q&A (Chegg/Bartleby/CourseHero)
+                    </label>
+                    <label class="service-option">
+                        <input type="checkbox" class="svc-chk" value="Professional CV / Resume"> 
+                        Professional CV / Resume Design
+                    </label>
+                    <label class="service-option">
+                        <input type="checkbox" class="svc-chk" value="Assignments (All Courses)"> 
+                        Assignments (All Courses)
+                    </label>
+                    <label class="service-option">
+                        <input type="checkbox" class="svc-chk" value="Final Year Project / Report"> 
+                        Final Year Project / Report
+                    </label>
+                    <label class="service-option">
+                        <input type="checkbox" class="svc-chk" value="Research Proposal / Synopsis"> 
+                        Research Proposal / Synopsis
+                    </label>
+                    <label class="service-option">
+                        <input type="checkbox" class="svc-chk" value="Thesis & Dissertation Writing"> 
+                        Thesis & Dissertation Writing
+                    </label>
+                    <label class="service-option">
+                        <input type="checkbox" class="svc-chk" value="Data Analysis (SPSS/Excel)"> 
+                        Data Analysis (SPSS/Excel)
+                    </label>
+                </div>
 
                 <div id="platform-options">
                     <label style="color:#0f172a; margin-bottom:10px;">Link Manager:</label>
@@ -173,8 +202,9 @@
             </div>
 
             <div class="form-group" style="background:#fef3c7; padding:10px; border-radius:8px; border:1px solid #fcd34d;">
-                <label class="checkbox-label" style="margin-top:0; color:#b45309;">
-                    <input type="checkbox" id="bulk-order"> 📌 I have multiple tasks/files (Bulk Order)
+                <label class="checkbox-label" style="margin-top:0; color:#b45309; display:flex; align-items:center; cursor:pointer;">
+                    <input type="checkbox" id="bulk-order" style="width:20px; height:20px; margin-right:10px;"> 
+                    📌 I have multiple tasks/files (Bulk Order)
                 </label>
             </div>
 
@@ -223,9 +253,13 @@
         function setTopic(name) { document.getElementById("topic").value = name; }
 
         function togglePlatforms() {
-            var service = document.getElementById("service").value;
+            var homeworkCheckbox = document.getElementById("chk-homework");
             var platformDiv = document.getElementById("platform-options");
-            platformDiv.style.display = service.includes("Homework Q&A") ? "block" : "none";
+            if (homeworkCheckbox.checked) {
+                platformDiv.style.display = "block";
+            } else {
+                platformDiv.style.display = "none";
+            }
         }
 
         function addLinkToList() {
@@ -259,25 +293,36 @@
         }
 
         function sendToWhatsApp() {
-            var service = document.getElementById("service").value;
+            // Get all checked services
+            var selectedServices = [];
+            var checkboxes = document.querySelectorAll('.svc-chk:checked');
+            checkboxes.forEach((checkbox) => {
+                selectedServices.push(checkbox.value);
+            });
+            var serviceString = selectedServices.join(", ");
+
+            if (selectedServices.length === 0) {
+                alert("Please select at least one service.");
+                return;
+            }
+
             var urgency = document.getElementById("urgency").value;
             var topic = document.getElementById("topic").value;
             var isBulk = document.getElementById("bulk-order").checked;
             
-            // UPDATED PHONE NUMBER
             var phone = "260750621616"; 
 
             var text = "*New Inquiry for PrimeGrade Solutions*\n\n";
             
             if (isBulk) {
-                text += "⚠️ *CLIENT MARKED AS BULK ORDER (Multiple Items)* ⚠️\n\n";
+                text += "⚠️ *CLIENT MARKED AS BULK ORDER* ⚠️\n\n";
             }
             
-            text += "📌 *Service:* " + service + "\n";
+            text += "📌 *Services Selected:* \n" + serviceString + "\n\n";
             text += "⏰ *Urgency:* " + urgency + "\n";
             if(topic) { text += "📚 *Topic:* " + topic + "\n"; }
 
-            if (service.includes("Homework Q&A") && savedLinks.length > 0) {
+            if (savedLinks.length > 0) {
                 text += "\n🔗 *Saved Links:* \n";
                 savedLinks.forEach(function(item, index) {
                     var count = index + 1;
