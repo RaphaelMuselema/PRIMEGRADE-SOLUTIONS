@@ -16,30 +16,16 @@
         body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background-color: var(--light); color: #333; line-height: 1.6; scroll-behavior: smooth; }
         a { text-decoration: none; color: inherit; }
         
-        /* HEADER (Set to lower layer so it doesn't block clicks) */
-        .header { 
-            background: linear-gradient(135deg, var(--primary), #1e293b); 
-            color: white; 
-            padding: 40px 20px 60px 20px; /* Added extra bottom padding for overlap */
-            text-align: center; 
-            border-bottom: 5px solid var(--gold); 
-            position: relative; 
-            z-index: 1; 
-        }
+        /* HEADER */
+        .header { background: linear-gradient(135deg, var(--primary), #1e293b); color: white; padding: 40px 20px; text-align: center; border-bottom: 5px solid var(--gold); position: relative; overflow: hidden; }
         .logo-img { width: 90px; height: 90px; background: white; border-radius: 50%; padding: 5px; object-fit: contain; border: 3px solid var(--gold); margin-bottom: 10px; box-shadow: 0 0 20px rgba(251, 191, 36, 0.5); position: relative; z-index: 2; }
         .brand { font-size: 28px; font-weight: 800; letter-spacing: 1px; margin: 5px 0; position: relative; z-index: 2; }
         .sub-headline { color: #cbd5e1; font-size: 15px; margin-top: 5px; margin-bottom: 20px; position: relative; z-index: 2; }
         .header-btn { background-color: var(--gold); color: var(--primary); padding: 12px 25px; border-radius: 30px; font-weight: bold; font-size: 16px; display: inline-block; box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4); transition: transform 0.2s; position: relative; z-index: 2; }
         .header-btn:active { transform: scale(0.95); }
 
-        /* LAYOUT (Set to HIGHER layer to ensure clicking works) */
-        .container { 
-            max-width: 800px; 
-            margin: -40px auto 40px auto; /* Creates the overlap */
-            padding: 20px; 
-            position: relative; 
-            z-index: 9999; /* THIS NUMBER FIXES THE CLICKING ISSUE */
-        }
+        /* LAYOUT */
+        .container { max-width: 800px; margin: -25px auto 40px auto; padding: 20px; position: relative; z-index: 3; }
         .card { background: white; border-radius: 16px; padding: 25px; box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1); margin-bottom: 25px; border: 1px solid #f1f5f9; }
         h2 { color: var(--primary); border-left: 6px solid var(--gold); padding-left: 15px; margin-top: 0; }
         h3 { color: var(--secondary); margin-top: 0; font-size: 18px; }
@@ -62,30 +48,11 @@
         .file-icon { font-size: 28px; margin-bottom: 5px; display: block; }
         .file-name { font-size: 12px; font-weight: bold; color: var(--secondary); }
 
-        /* FORM INPUTS - Forced High Z-Index */
-        .form-group { margin-bottom: 20px; position: relative; z-index: 100; }
+        /* FORM */
+        .form-group { margin-bottom: 20px; }
         label { display: block; font-weight: 700; margin-bottom: 8px; color: var(--secondary); }
-        select, input, textarea { 
-            width: 100%; 
-            padding: 15px; 
-            border: 2px solid #e2e8f0; 
-            border-radius: 12px; 
-            font-size: 16px; 
-            background: #f8fafc; 
-            box-sizing: border-box; 
-            font-family: inherit; 
-            -webkit-appearance: none; /* Helps on iPhones */
-            -moz-appearance: none;
-            appearance: none; /* Helps on Android */
-            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
-            background-repeat: no-repeat;
-            background-position: right .7em top 50%;
-            background-size: .65em auto;
-        }
-        /* Fix for regular inputs to remove arrow */
-        input { background-image: none; }
-
-        select:focus, input:focus, textarea:focus { border-color: var(--gold); background-color: white; outline: none; }
+        select, input, textarea { width: 100%; padding: 15px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 16px; background: #f8fafc; box-sizing: border-box; font-family: inherit; }
+        select:focus, input:focus, textarea:focus { border-color: var(--gold); background: white; outline: none; }
 
         /* MULTI-SELECT ADDER */
         .service-adder-row { display: flex; gap: 10px; }
@@ -161,6 +128,8 @@
         .payment-section { margin-top: 15px; }
         .payment-label { font-size: 12px; font-weight: bold; color: #94a3b8; margin-bottom: 5px; text-align: center; display: block; }
         .payment-row { display: flex; justify-content: center; gap: 15px; margin-bottom: 15px; flex-wrap: wrap; align-items: center; }
+        
+        /* Updated Logo Styles to ensure they look good */
         .pay-icon { height: 40px; width: auto; border-radius: 6px; border: 1px solid #e2e8f0; padding: 4px; background: white; object-fit: contain; }
         
         .footer { text-align: center; color: #64748b; padding-bottom: 80px; font-size: 13px; margin-top: 40px; }
@@ -306,4 +275,29 @@
             <h2>FAQ</h2>
             <details>
                 <summary>Is my information confidential?</summary>
-                <div class="faq-answer">Yes, 100%. We never share client data. All files are deleted from our system 30 days a
+                <div class="faq-answer">Yes, 100%. We never share client data. All files are deleted from our system 30 days after project completion.</div>
+            </details>
+            <details>
+                <summary>Do you know UNZA/CBU referencing styles?</summary>
+                <div class="faq-answer">Yes, we are experts in APA, Harvard, and IEEE referencing styles required by Zambian universities.</div>
+            </details>
+            <details>
+                <summary>Can I pay in installments?</summary>
+                <div class="faq-answer">For large projects (like Dissertations), we accept a 50% deposit. Smaller assignments require full payment upfront.</div>
+            </details>
+            <details>
+                <summary>How do I receive the work?</summary>
+                <div class="faq-answer">
+                    <strong>Local:</strong> Direct to your WhatsApp inbox.<br>
+                    <strong>International:</strong> Sent via WhatsApp or your preferred Email (PDF/Word).
+                </div>
+            </details>
+        </div>
+
+        <div class="card" style="text-align: center;">
+            <h3 style="margin-bottom:5px;">💳 Payment Options</h3>
+            <p style="font-size:12px; color:#94a3b8; margin-bottom: 20px;">SECURE PAYMENTS</p>
+            
+            <div class="payment-section">
+                <span class="payment-label">LOCAL (ZAMBIA)</span>
+                <p style="font-size:13px; margin: 0 0 10px 0;">We accept <strong>MTN Mobile Money
