@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrimeGrade Solutions | Excellence, Integrity, Precision</title>
+    <title>PrimeGrade Solutions | Order Now</title>
     <style>
         :root { --primary: #0f172a; --secondary: #334155; --gold: #fbbf24; --light: #f8fafc; --success: #16a34a; }
         body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background-color: var(--light); color: #333; line-height: 1.6; }
@@ -55,7 +55,8 @@
         .link-adder-row input { width: 65%; }
         .add-link-btn { background: #b45309; color: white; border: none; padding: 10px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; }
         #saved-links-list { margin-top: 15px; display: flex; flex-direction: column; gap: 8px; }
-        .saved-item { background: white; padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 13px; display: flex; justify-content: space-between; align-items: center; }
+        .saved-item { background: white; padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 13px; display: flex; justify-content: space-between; align-items: center; overflow: hidden; }
+        .saved-item a { color: #0369a1; text-decoration: underline; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 150px; display: inline-block; vertical-align: bottom;}
 
         /* FILE CHECKBOX */
         .checkbox-container { display: flex; align-items: center; gap: 10px; background: #f1f5f9; padding: 15px; border-radius: 12px; margin-bottom: 20px; cursor: pointer; border: 2px solid transparent; }
@@ -111,6 +112,7 @@
 
     <div class="container">
         
+        <!-- HOW IT WORKS -->
         <div class="card" style="background: transparent; box-shadow: none; border:none; padding: 0;">
             <div class="timeline-box">
                 <div class="timeline-step"><div class="step-icon">📝</div><span class="step-title">1. Request</span><div class="step-desc">Fill form & select urgency</div></div>
@@ -126,6 +128,7 @@
             <div class="trust-item"><span>✅</span>Original</div>
         </div>
 
+        <!-- ABOUT US -->
         <div class="card">
             <h2>Excellence in Every Field</h2>
             <p>We are a full-service consultancy. While we are best known for our <strong>Instant Homework Q&A</strong> and <strong>Executive CVs</strong>, our team is equally skilled in handling complex <strong>Final Year Projects, Dissertations, and Data Analysis</strong>.</p>
@@ -214,16 +217,17 @@
                 <span class="payment-label">LOCAL (ZAMBIA)</span>
                 <p style="font-size:13px; margin: 0 0 10px 0;">We accept <strong>MTN Mobile Money</strong>, <strong>Airtel Money</strong>, and <strong>Zamtel Kwacha</strong>.</p>
                 <div class="payment-row">
-                    <div style="padding:10px; border:1px solid #ddd; border-radius:5px;">MTN Money</div>
-                    <div style="padding:10px; border:1px solid #ddd; border-radius:5px;">Airtel Money</div>
-                    <div style="padding:10px; border:1px solid #ddd; border-radius:5px;">Zamtel</div>
+                    <!-- Placeholder images (ensure you have these files or they will show alt text) -->
+                    <img src="mtn.png" alt="MTN" class="pay-icon">
+                    <img src="airtel.png" alt="Airtel" class="pay-icon">
+                    <img src="zamtel.png" alt="Zamtel" class="pay-icon" style="border-radius:50%;">
                 </div>
             </div>
             <div class="payment-section">
                 <span class="payment-label">INTERNATIONAL</span>
                 <div class="payment-row">
-                     <div style="padding:10px; border:1px solid #ddd; border-radius:5px;">PayPal</div>
-                     <div style="padding:10px; border:1px solid #ddd; border-radius:5px;">Payoneer</div>
+                    <img src="paypal.png" alt="PayPal" class="pay-icon">
+                    <img src="payoneer.png" alt="Payoneer" class="pay-icon">
                 </div>
             </div>
         </div>
@@ -243,16 +247,18 @@
 
         function showToast(text) {
             var x = document.getElementById("toast");
-            x.textContent = text;
-            x.className = "show";
-            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+            if(x) {
+                x.textContent = text;
+                x.className = "show";
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+            } else {
+                alert(text);
+            }
         }
 
         function addNewServiceItem() {
             var dropdown = document.getElementById("service-dropdown");
             var svcName = dropdown.value;
-            
-            // Prevent duplicates
             var isDuplicate = false;
             for(var i=0; i < myServices.length; i++) { 
                 if(myServices[i] === svcName) isDuplicate = true; 
@@ -280,7 +286,11 @@
             var htmlBuilder = "";
             for(var i=0; i < myServices.length; i++) {
                 var num = i + 1;
-                htmlBuilder += '<div class="selected-svc-item"><div><span class="svc-number">' + num + '</span>' + myServices[i] + '</div><span class="delete-x" onclick="removeServiceItem(' + i + ')">×</span></div>';
+                // Breaking string to be copy-paste safe
+                htmlBuilder += '<div class="selected-svc-item">';
+                htmlBuilder += '<div><span class="svc-number">' + num + '</span>' + myServices[i] + '</div>';
+                htmlBuilder += '<span class="delete-x" onclick="removeServiceItem(' + i + ')">×</span>';
+                htmlBuilder += '</div>';
             }
             container.innerHTML = htmlBuilder;
         }
@@ -295,13 +305,4 @@
         }
 
         function saveLinkItem() {
-            var plat = document.getElementById("platform-select").value;
-            var urlVal = document.getElementById("link-input-field").value;
-            if(urlVal === "") { showToast("⚠️ Paste a link first!"); return; }
-            
-            var item = { p: plat, u: urlVal };
-            myLinks.push(item);
-            updateLinkDisplay();
-            document.getElementById("link-input-field").value = "";
-            showToast("🔗 Link Saved!");
-   
+            var plat = document.g
