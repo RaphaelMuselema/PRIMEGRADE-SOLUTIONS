@@ -305,4 +305,86 @@
         }
 
         function saveLinkItem() {
-            var plat = document.g
+            var plat = document.getElementById("platform-select").value;
+            var urlVal = document.getElementById("link-input-field").value;
+            if(urlVal === "") { 
+                showToast("⚠️ Paste a link first!"); 
+                return; 
+            }
+            var item = { p: plat, u: urlVal };
+            myLinks.push(item);
+            updateLinkDisplay();
+            document.getElementById("link-input-field").value = "";
+            showToast("🔗 Link Saved!");
+        }
+
+        function removeLinkItem(index) {
+            myLinks.splice(index, 1);
+            updateLinkDisplay();
+        }
+
+        function updateLinkDisplay() {
+            var container = document.getElementById("saved-links-list");
+            var htmlBuilder = "";
+            for(var i=0; i < myLinks.length; i++) {
+                var shortUrl = myLinks[i].u;
+                if(shortUrl.length > 35) {
+                    shortUrl = shortUrl.substring(0, 35) + "...";
+                }
+                
+                // Breaking string to be copy-paste safe
+                htmlBuilder += '<div class="saved-item">';
+                htmlBuilder += '<div><b>' + myLinks[i].p + ':</b> ';
+                htmlBuilder += '<a href="' + myLinks[i].u + '" target="_blank">' + shortUrl + '</a>';
+                htmlBuilder += '</div>';
+                htmlBuilder += '<span class="delete-x" onclick="removeLinkItem(' + i + ')">×</span>';
+                htmlBuilder += '</div>';
+            }
+            container.innerHTML = htmlBuilder;
+        }
+
+        function finalizeInquiry() {
+            // 1. Validate
+            if(myServices.length === 0) {
+                showToast("⚠️ Please add at least one service.");
+                return;
+            }
+
+            // 2. Collect Data
+            var urgency = document.getElementById("urgency").value;
+            var topic = document.getElementById("topic").value;
+            var hasFiles = document.getElementById("has-files").checked;
+
+            // 3. Build Message
+            var msg = "*NEW ORDER REQUEST*\n------------------\n";
+            msg += "*Selected Services:*\n";
+            for(var i=0; i<myServices.length; i++) {
+                msg += "• " + myServices[i] + "\n";
+            }
+
+            if(myLinks.length > 0) {
+                msg += "\n*Homework Links:*\n";
+                for(var j=0; j<myLinks.length; j++) {
+                    msg += "• (" + myLinks[j].p + ") " + myLinks[j].u + "\n";
+                }
+            }
+
+            msg += "\n*Urgency:* " + urgency;
+            if(topic) {
+                msg += "\n*Topic/Module:* " + topic;
+            }
+
+            if(hasFiles) {
+                msg += "\n\n📎 *NOTE:* I have files/PDFs to attach to this chat.";
+            }
+
+            // 4. Send
+            var phone = "260750621616";
+            var fullUrl = "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg);
+            
+            // Using location.href is often more reliable on Mobile than window.open
+            window.location.href = fullUrl;
+        }
+    </script>
+</body>
+</html>
